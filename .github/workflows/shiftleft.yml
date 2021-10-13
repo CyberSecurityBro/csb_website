@@ -1,4 +1,4 @@
-# This is a basic workflow to help you get started with Actions
+1# This is a basic workflow to help you get started with Actions
 
 name: Test Site Before update
 
@@ -34,7 +34,7 @@ jobs:
         env: 
           CHKP_CLOUDGUARD_ID: ${{ secrets.CHKP_CLOUDGUARD_ID }}
           CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
-          SHIFTLEFT_REGION: ${{ secrets.SHIFTLEFT_REGION }}
+          SHIFTLEFT_REGION: eu1
         run: |
           git clone https://github.com/CyberSecurityBro/csb_website
           ./shiftleft code-scan -s ./csb_website/
