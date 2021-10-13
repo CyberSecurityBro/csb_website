@@ -34,6 +34,7 @@ jobs:
         env: 
           CHKP_CLOUDGUARD_ID: ${{ secrets.CHKP_CLOUDGUARD_ID }}
           CHKP_CLOUDGUARD_SECRET: ${{ secrets.CHKP_CLOUDGUARD_SECRET }}
+          SHIFTLEFT_REGION: ${{ secrets.SHIFTLEFT_REGION }}
         run: |
           git clone https://github.com/CyberSecurityBro/csb_website
           ./shiftleft code-scan -s ./csb_website/
