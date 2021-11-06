@@ -37,7 +37,7 @@ jobs:
           SHIFTLEFT_REGION:  ${{ secrets.SHIFTLEFT_REGION }}
         run: |
           git clone https://github.com/CyberSecurityBro/csb_website
-          ./shiftleft code-scan -s ./csb_website/
+          ./shiftleft code-scan -r 2003 -s ./csb_website/
       
       # Runs a single command using the runners shell
       #- name: Run a one-line script
