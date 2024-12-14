@@ -89,8 +89,27 @@ html {
         <h2>Alejandro Herrera</h2>
         <p class="title">Provider of Hope</p>
         <p>I am here to help you take your journey into cybersecurity</p>
-        <p>This page is using GitHub, tested by GitHub Actions, pushed over to AWS using CodeDeploy and hosted via S3</p>
-        <p><a href="https://www.linkedin.com/in/alejandro-herrera-cissp" target="_blank">Connect with me on LinkedIn</a></p>
+        <style>
+          .indented-paragraph {
+              text-indent: 20px; /* Adjust the value for the desired indentation */
+          }
+      </style>
+      
+      <p>This page uses a small pipeline to showcase a simple workflow:</p>
+      <p class="indented-paragraph">
+          <strong>Code Hosting:</strong> The website's source code is hosted in a GitHub repository. This serves as the single source of truth for your project.
+      </p>
+      <p class="indented-paragraph">
+          <strong>Continuous Integration:</strong> When changes are pushed to the repository (e.g., updates to the code), GitHub Actions is triggered. GitHub Actions validates the code by running predefined workflows, such as linting, testing, or building the project.
+      </p>
+      <p class="indented-paragraph">
+          <strong>Deployment:</strong> Once the code passes validation, AWS CodeDeploy takes over. CodeDeploy retrieves the validated code and deploys it to an Amazon S3 bucket.
+      </p>
+      <p class="indented-paragraph">
+          <strong>Static Hosting:</strong> The S3 bucket hosts the static files for the website, making it accessible to users over the internet.
+      </p>
+      <p>This workflow automates testing, validation, and deployment, ensuring reliability and efficiency.</p>
+      <p><a href="https://www.linkedin.com/in/alejandro-herrera-cissp" target="_blank">Connect with me on LinkedIn</a></p>
         
         
       </div>
