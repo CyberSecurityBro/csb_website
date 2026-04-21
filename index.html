@@ -1,112 +1,406 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Alejandro Herrera — CISSP | Cybersecurity Professional. Security architecture, risk management, and practical defense.">
+  <title>Alejandro Herrera | Cybersecurity Professional</title>
+  <style>
+    /* === Tokens === */
+    :root {
+      --bg: #0f0f0f;
+      --surface: #161616;
+      --surface-2: #1e1e1e;
+      --border: #2a2a2a;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent: #60a5fa;
+      --accent-dim: rgba(96, 165, 250, 0.12);
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --max-width: 960px;
+      --radius: 8px;
+    }
 
-html {
-  box-sizing: border-box;
-}
+    /* === Reset === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
 
-*, *:before, *:after {
-  box-sizing: inherit;
-}
+    /* === Header === */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.875rem 2rem;
+      background: rgba(15, 15, 15, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .site-header.scrolled { box-shadow: 0 1px 20px rgba(0, 0, 0, 0.7); }
+    .nav-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .site-header nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1.5rem;
+      align-items: center;
+    }
+    .site-header nav a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .site-header nav a:hover { color: var(--text); }
 
-.column {
-  float: center;
-  width: 33.3%;
-  margin-bottom: 16px;
-  padding: 0 8px;
-}
+    /* === Inner container === */
+    .inner { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  margin: 8px;
-}
+    /* === Hero === */
+    #hero {
+      padding: 5rem 0 4.5rem;
+      background-image:
+        radial-gradient(ellipse 70% 80% at 10% 50%, rgba(96, 165, 250, 0.07) 0%, transparent 65%),
+        radial-gradient(circle, #252525 1px, transparent 1px);
+      background-size: auto, 28px 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    #hero .inner { display: flex; flex-direction: column; gap: 0; }
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+    .hero-tagline {
+      margin-top: 1.25rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.65;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      background: var(--accent-dim);
+      border: 1px solid rgba(96, 165, 250, 0.25);
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
 
-.about-section {
-  padding: 50px;
-  text-align: center;
-  background-color: #5f5f5f;
-  color: white;
-}
+    /* === Buttons === */
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.3rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-primary { background: var(--accent); color: #0a0a0a; }
+    .btn-primary:hover { background: #93c5fd; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid #333;
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
 
-.container {
-  padding: 0 16px;
-}
+    /* === About === */
+    #about {
+      padding: 4rem 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    #about .about-inner {
+      display: flex;
+      gap: 2.5rem;
+      align-items: flex-start;
+    }
+    .avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .about-text h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.875rem;
+      letter-spacing: -0.01em;
+      padding-left: 0.875rem;
+      border-left: 3px solid var(--accent);
+    }
+    .about-text p { color: var(--muted); margin-bottom: 0.85rem; font-size: 0.95rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text a { color: var(--accent); }
+    .about-text a:hover { text-decoration: underline; }
 
-.container::after, .row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+    /* === Blog === */
+    #blog {
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    #blog h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.25rem;
+      padding-left: 0.875rem;
+      border-left: 3px solid var(--accent);
+    }
+    .blog-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 2rem;
+      text-decoration: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .blog-card:hover {
+      border-color: var(--accent);
+      background: var(--surface-2);
+      box-shadow: 0 4px 24px rgba(96, 165, 250, 0.07);
+    }
+    .blog-card-body { flex: 1; }
+    .blog-card-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .blog-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      margin-bottom: 0.35rem;
+    }
+    .blog-card p {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+    .blog-card-arrow {
+      font-size: 1.5rem;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .blog-card:hover .blog-card-arrow {
+      color: var(--accent);
+      transform: translateX(4px);
+    }
 
-.title {
-  color: rgb(91, 91, 91);
-}
+    /* === Footer === */
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.5rem 2rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    footer nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+    footer nav a { color: var(--muted); transition: color 0.2s; }
+    footer nav a:hover { color: var(--text); }
 
-.button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
+    /* === Fade-in === */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
 
-.button:hover {
-  background-color: #555;
-}
-
-@media screen and (max-width: 650px) {
-  .column {
-    width: 100%;
-    display: block;
-  }
-}
-</style>
+    /* === Mobile === */
+    @media (max-width: 640px) {
+      .site-header { padding: 0.75rem 1.25rem; }
+      .inner { padding: 0 1.25rem; }
+      #hero { padding: 3.5rem 0 3rem; }
+      #about, #blog { padding: 3rem 0; }
+      #about .about-inner { flex-direction: column; align-items: center; text-align: center; }
+      .about-text h2 { border-left: none; padding-left: 0; border-bottom: 3px solid var(--accent); padding-bottom: 0.4rem; display: inline-block; }
+      .avatar { width: 140px; height: 140px; border-radius: 50%; }
+      .blog-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .blog-card-arrow { display: none; }
+      footer { padding: 1.5rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="about-section">
-  <h1>Welcome!</h1>
-  <p></p>
-</div>
-<center>
-<div class="row">
- 
-  <div class="column">
-    <div class="card">
-      <img src="https://supasecuritybro-bucks-2018.s3.amazonaws.com/NAT_0730.jpg" alt="Alejandro" style="width:100%">
-      <div class="container">
-        <h2>Alejandro Herrera</h2>
-        <p class="title">Provider of Hope</p>
-        <p>I am here to help you take your journey into cybersecurity</p>
-        <style>
-          .indented-paragraph {
-              text-indent: 20px; /* Adjust the value for the desired indentation */
-          }
-      </style>
-      
-      <p>This page is hosted with Cloudflare Pages</p>
-      
-      <p><a href="https://www.linkedin.com/in/alejandro-herrera-cissp" target="_blank">Connect with me on LinkedIn</a></p>
-      <p><a href="https://resume.cybersecuritybro.com" target="_blank">CICD Project running on bare metal</a></p>  
-        
+  <!-- <header class="site-header">
+    <span class="nav-name">Alejandro Herrera</span>
+    <nav>
+      <a href="#about">About</a>
+      <a href="https://resume.cybersecuritybro.com" target="_blank" rel="noopener">Resume</a>
+    </nav>
+  </header> -->
+
+  <main>
+
+    <section id="hero">
+      <div class="inner">
+        <p class="hero-eyebrow">Cloud-Native Security Architect</p>
+        <h1 class="hero-name">Alejandro<br>Herrera</h1>
+        <p class="hero-tagline">Specializing in DevSecOps, AI Engineering, and Secure Cloud Architecture — building secure environments that enable organization productivity.</p>
+        <div class="hero-badges">
+          <span class="badge">CISSP</span>
+          <span class="badge">CKA</span>
+          <span class="badge">CKAD</span>
+          <span class="badge">AWS Solutions Architect</span>
+          <span class="badge">CCSK</span>
+        </div>
+        <div class="hero-cta">
+          <a href="https://blog.herreralab.cloud" target="_blank" rel="noopener" class="btn btn-primary">Read the Blog</a>
+          <a href="https://resume.cybersecuritybro.com" target="_blank" rel="noopener" class="btn btn-secondary">View Resume</a>
+          <a href="https://www.linkedin.com/in/alejandro-herrera-cissp" target="_blank" rel="noopener" class="btn btn-secondary">LinkedIn</a>
+        </div>
       </div>
-    </div>
-  </div>
-   
-  </div>
-</div>
+    </section>
+
+    <section id="about" class="fade-in">
+      <div class="inner">
+        <div class="about-inner">
+          <img
+            src="https://supasecuritybro-bucks-2018.s3.amazonaws.com/NAT_0730.jpg"
+            alt="Alejandro Herrera"
+            class="avatar"
+            width="200"
+            height="200"
+          >
+          <div class="about-text">
+            <h2>About Me</h2>
+            <p>
+              I’m a Cloud Native Security Architect based in Miami, FL.
+              I design and secure systems across AWS and GCP, with a focus on DevSecOps, AI-driven workflows, and Kubernetes-based infrastructure.
+            </p>
+             <p><b>
+              My approach is simple: security should be built into the system, not added later.
+             </b>
+             </p>
+             <p>
+              I work hands-on with Kubernetes, Terraform, ArgoCD, and Cilium to implement real-world security patterns in live environments.
+              I hold CISSP, CKA, CKAD, AWS Solutions Architect, and CCSK certifications.
+            </p>
+            <p>
+              I write about cloud security, homelab experiments, and breaking into
+              the field at <a href="https://blog.herreralab.cloud" target="_blank" rel="noopener">blog.herreralab.cloud</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- <section id="blog" class="fade-in">
+      <div class="inner">
+        <h2>From the Blog</h2>
+        <a href="https://blog.herreralab.cloud" target="_blank" rel="noopener" class="blog-card">
+          <div class="blog-card-body">
+            <p class="blog-card-label">herreralab.cloud</p>
+            <h3>Security insights, homelab experiments, and career notes</h3>
+            <p>Practical cybersecurity writing for practitioners and those breaking in.</p>
+          </div>
+          <span class="blog-card-arrow">→</span>
+        </a>
+      </div>
+    </section> -->
+
+  </main>
+
+  <!-- <footer>
+    <span>&copy; 2026 Alejandro Herrera</span>
+    <nav>
+      <a href="https://resume.cybersecuritybro.com" target="_blank" rel="noopener">Resume</a>
+      <a href="https://www.linkedin.com/in/alejandro-herrera-cissp" target="_blank" rel="noopener">LinkedIn</a>
+    </nav>
+  </footer> -->
+
+  <script>
+    const header = document.querySelector('.site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
-
